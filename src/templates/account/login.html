@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/colorbox/colorbox.css '%}">   
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            <form method="post" class="border p-3 rounded" style="margin-top: 100px;">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <h3 class="text-center h2">Kirish</h3>
+                {% if messages %}
+                  {% for messages in message %}
+                    <p> {{message}} </p>
+                  {% endfor %}
+                {% endif %}
+                <div class="mb-3 mt-3">
+                  <label for="username" class="form-label">Foydalanuvchi nomi</label>
+                  <input type="text" class="form-control" id="username" placeholder="Foydalanuvchi nomini kiriting" name="username">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Parol</label>
+                  <input type="password" class="form-control" id="password" placeholder="Parolni kiriting" name="password">
+                </div>
+                <div class="form-check mb-3">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="remember"> Meni eslab qol
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-success w-100 mb-4">Kirish</button>
+                <p class="forgot-password">Parolni unutdingizmi? <a href="#" class="text-success">qayta tiklash</a></p>
+                <p class="create-account">Hisobingiz mavjud emasmi ? <a href="{% url 'register' %}" class="text-success">hoziroq yarating</a></p>
+            </form>
+        </div>
+    </div>
+  </div>
+  <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+  <script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+  <script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
+  <script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+  <script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+  <script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+  <script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+  <script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+  <script src="{% static 'plugins/easing/easing.js' %}"></script>
+  <script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+  <script src="{% static 'plugins/colorbox/jquery.colorbox-min.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>{% block title %}{{test.name}}{% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Unicat project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/course.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/course_responsive.css' %}">
+</head>
+<body>
+
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a href="index.html">Bosh sahifa</a></li>
+								<li><a href="{% url 'tests' %}">Testlar</a></li>
+								<li>{{test.name}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+
+	<!-- Test -->
+
+	<div class="course">
+		<div class="container">
+			<div class="row">
+				<!-- Test -->
+				<div class="col-lg-12">
+					<div class="course_container">
+						<div class="course_title">{{test.name}}</div>
+                        <a href="{% url 'getfile' test.pk %}" class="btn btn-info mt-3">
+                            <i class="fa-solid fa-book mr-1"></i> Savollar kitobi
+                        </a>
+                        <div class="table-responsive mt-5">
+                            <table class="table table-hover text-center table-bordered align-middle">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">A</th>
+                                    <th scope="col">B</th>
+                                    <th scope="col">C</th>
+                                    <th scope="col">D</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    {% for a in test.answers %}
+                                        <tr>
+                                            <th scope="row">{{forloop.counter}}</th>
+                                            <td>  
+                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" id="a{{forloop.counter}}">
+                                            </td>
+                                            <td>  
+                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" id="a{{forloop.counter}}">
+                                            </td>
+                                            <td>  
+                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" id="a{{forloop.counter}}">
+                                            </td>
+                                            <td>  
+                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" id="a{{forloop.counter}}">
+                                            </td>
+                                          </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <form action="{% url 'checkanswers' test.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="answers" id="answers">
+                                <button type="submit" class="btn btn-success mt-4">Testni yakunlash</button>
+                            </form>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+{% endblock content %}
