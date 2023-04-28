@@ -1367,6 +1367,7 @@ section
 .event_date
 {
 	box-shadow: 0px 1px 10px rgba(29, 34, 47, 0.1);
+	border-radius: 50%;
 }
 .event_date > div
 {
