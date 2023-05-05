@@ -21,7 +21,8 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('testmania/', admin.site.urls),
+    path('admin/', include('admin_honeypot.urls')),
     path('tests/', include('exam.urls')),
     path('account/', include('account.urls')),
     path('account/', include('django.contrib.auth.urls')),

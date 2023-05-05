@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 offset-lg-4">
-                <form action="" class="border p-3 rounded" style="margin-top: 100px;">
+                <form action="{% url 'register' %}" class="border p-3 rounded" style="margin-top: 100px;">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <h3 class="text-center h2">Registratsiya</h3>

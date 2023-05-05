@@ -822,6 +822,12 @@ section
 	margin: 0 auto;
 	margin-top: 35px;
 }
+.home_slider_form_container a{
+	padding: 16px;
+	background-color: #14bdee;
+	color: #FFFFFF;
+	border-radius: .25rem;
+}
 .home_search_form div
 {
 	width: calc(100% - 140px);

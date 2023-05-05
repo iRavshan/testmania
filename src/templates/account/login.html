@@ -21,7 +21,7 @@
   <div class="container">
     <div class="row">
         <div class="col-lg-4 offset-lg-4">
-            <form method="post" class="border p-3 rounded" style="margin-top: 100px;">
+            <form method="post" class="border p-3 rounded" style="margin-top: 100px;" action="{% url 'login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <h3 class="text-center h2">Kirish</h3>

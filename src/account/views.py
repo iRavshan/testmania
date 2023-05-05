@@ -4,10 +4,11 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
 
 def Register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid:
             form.save()
             username = form.cleaned_data['username']
@@ -16,9 +17,12 @@ def Register(request):
             login(request, user)
             return redirect('home')
         else:
-            form = UserCreationForm()
-        
-    return render(request, 'account/register.html')
+            form = SignUpForm(),
+            context = {
+                'form':form
+            }
+            
+    return render(request, 'account/register.html', context)
 
 def Login(request):
     if request.method == "POST":
