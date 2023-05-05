@@ -7,21 +7,20 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 
 def Register(request):
+    form = SignUpForm()
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid:
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('pwd')
             form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['pwd']
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('home')
-        else:
-            form = SignUpForm(),
-            context = {
-                'form':form
-            }
-            
+            new_user = authenticate(username=username, password=password)
+            if new_user is not None:
+                login(request, new_user)
+                return redirect('home')
+    context = {
+        'form':form
+    }
     return render(request, 'account/register.html', context)
 
 def Login(request):

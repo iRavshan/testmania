@@ -28,11 +28,11 @@
                     <h3 class="text-center h2">Registratsiya</h3>
                     <div class="mb-3">
                         <label for="firstname" class="form-label">Ismingiz</label>
-                        <input type="text" class="form-control" id="firstname" placeholder="Ismingizni kiriting" name="firstname">
+                        {{form.first_name}} 
                     </div>
                     <div class="mb-3">
                         <label for="lastname" class="form-label">Familiya</label>
-                        <input type="text" class="form-control" id="lastname" placeholder="Familiyangizni kiriting" name="lastname">
+                        {{form.last_name}}
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="username" class="form-label">Foydalanuvchi nomi</label>
@@ -40,11 +40,11 @@
                     </div>
                     <div class="mb-3">
                       <label for="pwd" class="form-label">Parol yarating</label>
-                      <input type="password" class="form-control" id="pwd" placeholder="Parolni kiriting" name="pwd">
+                      <input type="password" class="form-control" id="pwd" placeholder="Parolni kiriting" name="password1">
                     </div>
                     <div class="mb-3">
                         <label for="pwd2" class="form-label">Parolni takrorlang</label>
-                        <input type="password" class="form-control" id="pwd2" placeholder="Parolni qayta kiriting" name="pwd2">
+                        <input type="password" class="form-control" id="pwd2" placeholder="Parolni qayta kiriting" name="password2">
                     </div>
                     <button type="submit" class="btn btn-success w-100 mt-3 mb-4">Kirish</button>
                     <p class="create-account text-center">Hisobingiz mavjudmi ? <a href="{% url 'login' %}" class="text-success">Faollashtiring</a></p>
