@@ -32,7 +32,6 @@ def GetTest(request, pk):
     test = Test.objects.get(id=pk)
 
     if test is not None:
-
         if request.method == 'GET':
             all_attempts = TestScore.objects.filter(test=test)
             last_scores = all_attempts[:10]
@@ -44,6 +43,7 @@ def GetTest(request, pk):
                 for a in all_attempts:
                     average_score += a.count_of_correct_answers * test.point
                 average_score /= attempts
+                average_score = round(average_score, 2)
 
             context = {
                 'test': test,
@@ -69,7 +69,8 @@ def CheckAnswers(request, pk):
                                user=request.user,
                                result=checked_correct_answers * test.point)
         test_score.save(force_insert=True)
-        return redirect('/')
+        request.method = 'GET'
+        return GetTest(request, pk)
     
 def CheckTest(correct_answers: str, options: str, count: int) -> int:
     counter = 0
