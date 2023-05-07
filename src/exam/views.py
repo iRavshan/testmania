@@ -24,7 +24,7 @@ def Home(request):
             if result not in search_results:
                 search_results.append(result)
                 
-    context['search_texts'] = search_text,
+    context['search_text'] = search_text,
     context['tests'] = search_results
     return render(request, 'exam/home.html', context)
     

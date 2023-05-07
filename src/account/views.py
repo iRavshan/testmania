@@ -5,22 +5,28 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
+from .models import CustomUser
 
 def Register(request):
-    form = SignUpForm()
+    context={}
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid:
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('pwd')
             form.save()
-            new_user = authenticate(username=username, password=password)
+            firstname = form.cleaned_data['first_name']
+            lastname = form.cleaned_data['last_name']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            checked_user = CustomUser.objects.filter(username=username).exists()
+            if(checked_user):
+                context['form'] = form
+                context['error'] = 'Ushbu foydalanuvchi nomi band'
+            new_user = authenticate(request, username=username, password=password)
             if new_user is not None:
                 login(request, new_user)
                 return redirect('home')
-    context = {
-        'form':form
-    }
+    form = SignUpForm()
+    context['form'] = form
     return render(request, 'account/register.html', context)
 
 def Login(request):

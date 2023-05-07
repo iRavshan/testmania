@@ -32,8 +32,6 @@
 		</div>			
 	</div>
 
-	<!-- Test -->
-
 	<div class="course">
 		<div class="container">
 			<div class="row">
@@ -57,35 +55,39 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                     {% for a in test.answers %}
-                                        <tr>
+                                        <tr class="countOfanswerRows">
                                             <th scope="row">{{forloop.counter}}</th>
                                             <td>  
-                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" id="a{{forloop.counter}}">
+                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="a">
                                             </td>
                                             <td>  
-                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" id="a{{forloop.counter}}">
+                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="b">
                                             </td>
                                             <td>  
-                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" id="a{{forloop.counter}}">
+                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="c">
                                             </td>
                                             <td>  
-                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" id="a{{forloop.counter}}">
+                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="d">
                                             </td>
-                                          </tr>
+                                        </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
-                            <form action="{% url 'checkanswers' test.pk %}" method="post">
+                            <form action="{% url 'checkanswers' test.pk %}" method="post" id="answersForm">
                                 {% csrf_token %}
-                                <input type="text" name="answers" id="answers">
-                                <button type="submit" class="btn btn-success mt-4">Testni yakunlash</button>
+                                <input type="text" name="answers" id="answers" hidden>
+                                <button type="submit" class="btn btn-success mt-4" hidden></button>
                             </form>
+                            <button class="btn btn-success mt-4" onclick="checkTest()">Testni yakunlash</button>
                         </div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+<script> 
+</script>
+<script src="{% static 'js/test.js' %}"></script>
 </body>
 </html>
 {% endblock content %}

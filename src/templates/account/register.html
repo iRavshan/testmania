@@ -22,9 +22,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 offset-lg-4">
-                <form action="{% url 'register' %}" class="border p-3 rounded" style="margin-top: 100px;">
+                <form action="{% url 'register' %}" class="border p-3 rounded" style="margin-top: 100px;" method="post"> 
+                    {% if form.errors %}
+                        {% for error in form.errors %}
+                            <p>{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
                     {% csrf_token %}
-                    {{ form.as_p }}
                     <h3 class="text-center h2">Registratsiya</h3>
                     <div class="mb-3">
                         <label for="firstname" class="form-label">Ismingiz</label>
@@ -36,15 +40,15 @@
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="username" class="form-label">Foydalanuvchi nomi</label>
-                        <input type="text" class="form-control" id="username" placeholder="Foydalanuvchi nomi yarating" name="username">
+                        {{form.username}}
                     </div>
                     <div class="mb-3">
-                      <label for="pwd" class="form-label">Parol yarating</label>
-                      <input type="password" class="form-control" id="pwd" placeholder="Parolni kiriting" name="password1">
+                      <label for="password1" class="form-label">Parol yarating</label>
+                      {{form.password1}}
                     </div>
                     <div class="mb-3">
-                        <label for="pwd2" class="form-label">Parolni takrorlang</label>
-                        <input type="password" class="form-control" id="pwd2" placeholder="Parolni qayta kiriting" name="password2">
+                        <label for="password2" class="form-label">Parolni takrorlang</label>
+                        {{form.password2}}                    
                     </div>
                     <button type="submit" class="btn btn-success w-100 mt-3 mb-4">Kirish</button>
                     <p class="create-account text-center">Hisobingiz mavjudmi ? <a href="{% url 'login' %}" class="text-success">Faollashtiring</a></p>
