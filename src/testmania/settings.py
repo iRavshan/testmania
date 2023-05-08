@@ -21,9 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-SECRET_KEY=config('SECRET_KEY')
+SECRET_KEY = 'django-insecure-mk9o(owy=#o=r&650x8essq653rkh9zk#^thc&m!r^rz00vce)'
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -76,11 +76,11 @@ WSGI_APPLICATION = 'testmania.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'testmania',
+        'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': "Qarshi-2002",
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'PASSWORD': "uoWaiDZMVUWRaFPN4pK8",
+        'HOST': 'containers-us-west-143.railway.app',
+        'PORT': '5728'
     }
 }
 
