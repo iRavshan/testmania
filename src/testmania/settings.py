@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-mk9o(owy=#o=r&650x8essq653rkh9zk#^thc&m!r^rz00vce)'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'testmania.up.railway.app',
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = ['https://testmania.up.railway.app']
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,8 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'exam',
-    'admin_honeypot',
-    'whitenoise.runserver_nostatic'
+    'admin_honeypot'
 ]
 
 MIDDLEWARE = [
