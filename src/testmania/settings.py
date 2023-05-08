@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-mk9o(owy=#o=r&650x8essq653rkh9zk#^thc&m!r^rz00vce)
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['testmania.up.railway.app']
+
+CSRF_TRUSTED_ORIGINS = ['https://testmania.up.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'testmania.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR.joinpath('templates'))],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
