@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'exam',
-    'admin_honeypot'
+    'admin_honeypot',
+    'blog',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
