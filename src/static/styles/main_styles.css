@@ -1827,6 +1827,52 @@ section
 	letter-spacing: 0.1em;
 }
 
+
+.partners
+{
+	width: 100%;
+	background: #FFFFFF;
+}
+.partners_slider_container
+{
+	width: calc(100% + 100px);
+	left: -50px;
+}
+.partners_slider
+{
+	height: 132px;
+}
+.partner_item
+{
+	height: 100%;
+	cursor: pointer;
+}
+.partner_item img
+{
+	position: relative;
+	width: 110px !important;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	-webkit-filter: grayscale(100%);
+  	filter: grayscale(100%);
+  	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.partner_item:hover img
+{
+	-webkit-filter: grayscale(0%);
+  	filter: grayscale(0%);
+}
+
+
 /*********************************
 14. Footer
 *********************************/
