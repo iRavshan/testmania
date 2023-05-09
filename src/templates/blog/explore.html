@@ -14,48 +14,57 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/blog_responsive.css' %}">
 </head>
 <body>
-    <div class="home">
-		<div class="breadcrumbs_container">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="breadcrumbs">
-							<ul>
-								<li><a href="{% url 'home' %}">Bosh sahifa</a></li>
-								<li><a href="{% url 'tests' %}">Testlar</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>			
-	</div>
     <div class="blog">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-12">
-    
-                </div>
+                    {% if user.is_authenticated %}
+					<div class="card profile-card mb-4">
+						<div class="card-body text-center">
+							<img src="{% static 'images/user.png' %}" alt="avatar" class="profile-img">
+							<div class="profile-info py-3">
+								<p class="profile-fullname">{{user.first_name}} {{user.last_name}}</p>
+								<p class="profile-username">{{user.username}}</p>
+							</div>
+						</div>
+						<div class="card-footer">
+							<p>0 starred topics</p>
+						</div>
+						<div class="card-footer">
+							<p>0 starred topics</p>
+						</div>
+					</div>
+                    {% endif %}
+				</div>
                 <div class="col-lg-6 col-md-8">
                 {% if posts %}
                     {% for post in posts %}
                         <div class="blog_post trans_200">
-                            <div class="blog_post_image"><img src="/uploads/{{post.thumbnail}}" alt=""></div>
                             <div class="blog_post_body">
-                                <div class="blog_post_title"><a href="#">{{post.title}}</a></div>
-                                <div class="blog_post_meta">
-                                    <ul>
-                                        <li><a href="#">{{post.author.}}</a></li>
-                                        <li><a href="#">{{post.created_at|timesince}} avval</a></li>
-                                    </ul>
-                                </div>
-                                <div class="blog_post_text">
-                                    <p>{{post.description|safe|truncatechars:250}}</p>
+                                <div class="post-left d-flex">
+                                    <img src="{% static 'images/user.png' %}" alt="">
+                                    <div>
+                                        <a href="#" class="post-author">Ravshan Sodiqov</a>
+                                        <p class="post-date">{{post.created_at|timesince}} avval</p>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="blog_post_image">
+                                <img src="/uploads/{{post.thumbnail}}" alt="">
+                            </div>
+                            <div class="post-right">
+                                <div class="blog_post_title"><a href="blog_single.html">{{post.title}}</a></div>
+                                <div class="blog_post_text">
+                                    <p>{{post.description|safe|truncatechars:250}}</p>
+                                    <a href="">Batafsil</a>
+                                </div>
+                            </div>   
                         </div>
                     {% endfor %}
                 {% endif %}
+                </div>
+                <div class="col-lg-3">
+                    
                 </div>
             </div>
         </div>

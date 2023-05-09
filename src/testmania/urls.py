@@ -26,8 +26,7 @@ urlpatterns = [
     path('tests/', include('exam.urls')),
     path('account/', include('account.urls')),
     path('account/', include('django.contrib.auth.urls')),
-    path('explore/', include('blog.urls')),
-    path('', views.Home, name='home')
+    path('', include('blog.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Post
 
 def Home(request):
-    posts = Post.objects.all().order_by('created_at').values()
+    posts = Post.objects.all().order_by('-created_at').values()
     context = {
         'posts': posts
     }
