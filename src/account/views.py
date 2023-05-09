@@ -36,7 +36,7 @@ def Login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse('salom')
+            return redirect('/')
         messages.error(request, 'Foydalanuvchi nomi yoki parol xato')
         return redirect('login')
     return render(request, 'account/login.html')
