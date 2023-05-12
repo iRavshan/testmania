@@ -2,72 +2,23 @@
 {% block content %}
 <!DOCTYPE html>
 {% load static %}
-{% load tz %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Yangiliklar{% endblock title %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'plugins/video-js/video-js.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/blog.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/blog_responsive.css' %}">
-</head>
-<body>
-	<div class="home">
-        <div class="breadcrumbs_container">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="breadcrumbs">
-                            <ul>
-                                <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
-                                <li>Yangiliklar</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>			
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Yangiliklar</h4>
+    <div class="row mb-5">
+      {% if posts %}
+      {% for post in posts %}
+      <div class="col-md-6 col-lg-4 mb-3">
+        <div class="card h-100">
+          <img class="card-img-top" src="/uploads/{{post.thumbnail}}" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'post' post.id %}">{{post.title}}</a></h5>
+            <p class="card-text">{{post.description|safe|truncatechars:200}}</p>
+            <a href="{% url 'post' post.id %}" class="btn btn-outline-primary">Batafsil</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
     </div>
-    <div class="blog">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="blog_post_container">
-						<div class="row">
-						{% if posts %}
-						{% for post in posts %}
-						<!-- Blog Post -->
-							<div class="col-lg-4">
-								<div class="blog_post trans_200">
-									<div class="blog_post_image"><img src="/uploads/{{post.thumbnail}}" alt="{{post.title}}"></div>
-									<div class="blog_post_body">
-										<div class="blog_post_title"><a href="{% url 'post' post.id %}">{{post.title}}</a></div> 
-										<div class="blog_post_meta">
-											<ul>
-												<li>{{post.author.username}}</li>
-												<li>{{post.created_at|timesince}} avval</li>
-											</ul>
-										</div>
-										<div class="blog_post_text">
-											{{post.description|safe|truncatechars:200}}
-										</div>
-										<a class="btn" href="{% url 'post' post.id %}">
-											Batafsil
-										</a>
-									</div>
-								</div>
-							</div>
-						{% endfor %}
-						{% endif %}
-					</div>
-					</div> 
-				</div>
-			</div>
-		</div>
-	</div>
-<script src="{% static 'js/blog.js' %}"></script>
-</body>
-</html>
+</div>
 {% endblock content %}

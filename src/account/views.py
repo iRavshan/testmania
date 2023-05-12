@@ -44,3 +44,10 @@ def Login(request):
 def Logout(request):
     logout(request)
     return render(request, 'account/login.html')
+
+def Settings(request):
+    user = CustomUser.objects.get(id=request.user.id)
+    context={
+        'user': user
+    }
+    return render(request, 'account/settings.html', context)
