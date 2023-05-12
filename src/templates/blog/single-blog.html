@@ -1,12 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
 <!DOCTYPE html>
+{% load static %}
+{% load tz %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block title %}{{post.title}}{% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/video-js/video-js.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/blog_single.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/blog_single_responsive.css' %}">
 </head>
 <body>
-    
+    <div class="blog" style="margin-top: 70px;">
+		<div class="container">
+			<div class="row">
+
+				<!-- Blog Content -->
+				<div class="col-lg-8 offset-lg-2">
+					<div class="blog_content">
+						<div class="blog_title">{{post.title}}</div>
+						<div class="blog_meta">
+							<ul>
+								<li>{{post.created_at}}</li>
+								<li>{{post.author.username}}</li>
+							</ul>
+						</div>
+						<div class="blog_image"><img src="/uploads/{{post.thumbnail}}" alt="{{post.title}}"></div>
+						{{post.description|safe}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="{% static 'js/blog_single.js' %}"></script>
 </body>
 </html>
+{% endblock content %}

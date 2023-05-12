@@ -1,39 +1,4 @@
 @charset "utf-8";
-/* CSS Document */
-
-/******************************
-
-[Table of Contents]
-
-1. Fonts
-2. Body and some general stuff
-3. Header
-	3.1 Top Bar
-	3.2 Header Content
-	3.3 Logo
-	3.4 Main Nav
-	3.5 Hamburger
-4. Menu
-5. Section
-6. Home
-7. Blog
-8. Sidebar
-9. Newsletter
-10. Footer
-
-
-
-******************************/
-
-/***********
-1. Fonts
-***********/
-
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:300,400,500,700,900');
-
-/*********************************
-2. Body and some general stuff
-*********************************/
 
 *
 {
@@ -45,7 +10,7 @@
 }
 body
 {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	background: #FFFFFF;
@@ -66,7 +31,7 @@ ul
 }
 p
 {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	line-height: 1.85;
 	font-weight: 400;
@@ -127,7 +92,7 @@ h4{font-size: 18px;}
 h5{font-size: 14px;}
 h1, h2, h3, h4, h5, h6
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-weight: 700;
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
@@ -290,7 +255,7 @@ section
 }
 .question
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 14px;
 	color: #FFFFFF;
 	margin-left: 0px;
@@ -378,7 +343,7 @@ section
 }
 .logo_text
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 36px;
 	font-weight: 700;
 	line-height: 0.75;
@@ -641,7 +606,7 @@ section
 }
 .menu_nav ul li a
 {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	text-transform: uppercase;
 	color: rgba(0,0,0,1);
@@ -693,35 +658,35 @@ section
 }
 .menu .search_input::-webkit-input-placeholder
 {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: rgba(0,0,0,0.4) !important;
 }
 .menu .search_input:-moz-placeholder
 {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: rgba(0,0,0,0.4) !important;
 }
 .menu .search_input::-moz-placeholder
 {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: rgba(0,0,0,0.4) !important;
 } 
 .menu .search_input:-ms-input-placeholder
 { 
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: rgba(0,0,0,0.4) !important;
 }
 .menu .search_input::input-placeholder
 {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: rgba(0,0,0,0.4) !important;
@@ -821,11 +786,16 @@ section
 }
 .blog_title
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 30px;
 	font-weight: 700;
 	line-height: 1.2;
 	color: #384158;
+}
+
+.blog_content img{
+	width: 100%;
+	border-radius: .25rem;
 }
 .blog_meta
 {
@@ -985,7 +955,7 @@ section
 }
 .comments_title
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 24px;
 	font-weight: 700;
 	color: #2c3145;
@@ -1024,7 +994,7 @@ section
 }
 .comment_author a
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 18px;
 	font-weight: 700;
 	color: #384158;
@@ -1095,7 +1065,7 @@ section
 }
 .add_comment_title
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 24px;
 	font-weight: 700;
 	color: #384158;
@@ -1227,7 +1197,7 @@ section
 }
 .sidebar_section_title
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 24px;
 	font-weight: 700;
 	color: #384158;
@@ -1295,7 +1265,7 @@ section
 }
 .latest_title a
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 16px;
 	font-weight: 700;
 	color: #383749;
@@ -1431,7 +1401,7 @@ section
 }
 .banner_title
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 20px;
 	font-weight: 700;
 	color: #FFFFFF;
@@ -1501,7 +1471,7 @@ section
 }
 .newsletter_title
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 20px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -1612,7 +1582,7 @@ section
 }
 .footer_logo_text
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 36px;
 	font-weight: 700;
 	line-height: 0.75;
@@ -1629,7 +1599,7 @@ section
 }
 .footer_title
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Montserrat', serif;
 	font-size: 18px;
 	font-weight: 700;
 	color: #FFFFFF;
