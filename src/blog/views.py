@@ -6,7 +6,7 @@ def Home(request):
     context = {
         'posts': posts
     }
-    return render(request, 'blog/explore.html', context)
+    return render(request, 'blog/blog.html', context)
 
 def SingleBlog(request, pk):
     post = Post.objects.get(id=pk)
