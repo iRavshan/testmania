@@ -1,348 +1,79 @@
 {% extends 'base.html' %}
 {% block content %}
-<!DOCTYPE html>
 {% load static %}
-<html lang="en">
-<head>
-    <title>{% block title %}{{test.name}}{% endblock title %}</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Unicat project">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/course.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/course_responsive.css' %}">
-</head>
-<body>
-
-	<div class="home">
-		<div class="breadcrumbs_container">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="breadcrumbs">
-							<ul>
-								<li><a href="{% url 'home' %}">Bosh sahifa</a></li>
-								<li><a href="{% url 'tests' %}">Testlar</a></li>
-								<li>{{test.name}}</li>
-							</ul>
-						</div>
-					</div>
+<div class="container-xxl flex-grow-1 container-p-y">      
+	<h4 class="fw-bold py-3 mb-4">{{test.name}}</h4>
+	<div class="row">
+	  <div class="col-lg-8">
+		<div class="nav-align-top mb-4">
+		  <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+			<li class="nav-item">
+			  <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home" aria-selected="true"><i class="tf-icons bx bx-user-pin"></i> Natijangiz</button>
+			</li>
+			<li class="nav-item">
+			  <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-profile" aria-controls="navs-pills-justified-profile" aria-selected="false"><i class="tf-icons bx bx-stats"></i> Statistika</button>
+			</li>
+			<li class="nav-item">
+			  <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-messages" aria-controls="navs-pills-justified-messages" aria-selected="false"><i class="tf-icons bx bx-message-square"></i> Izoh</button>
+			</li>
+		  </ul>
+		  <div class="tab-content">
+			<div class="tab-pane fade active show" id="navs-pills-justified-home" role="tabpanel">
+				<div class="text-center">
+					<h6>Sizning natijangiz</h6>
+					<h5 class="fw-bold text-center mt-3 mb-3" style="font-size: 70px;">{{score_of_user.result}}</h5>
+					<span class="text-primary mx-3" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="bottom" data-bs-html="true" title="" data-bs-original-title="<span>Barcha savollar soni</span>"><i class="fa-solid fa-circle-question"></i> {{test.count_of_questions}} </span>
+					<span class="text-success mx-3" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="bottom" data-bs-html="true" title="" data-bs-original-title="<span>To'g'ri javoblar soni</span>"><i class="fa-solid fa-circle-check"></i> 8</span>
 				</div>
 			</div>
-		</div>			
-	</div>
-
-	<!-- Course -->
-
-	<div class="course">
-		<div class="container">
-			<div class="row">
-
-				<!-- Course -->
-				<div class="col-lg-8">
-					
-					<div class="course_container">
-						<div class="course_title">{{test.name}}</div>
-						<div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-
-							<!-- Course Info Item -->
-							<div class="course_info_item">
-								<div class="course_info_title">Urinishlar:</div>
-								<div class="course_info_text"><p>{{attempts}} ta</p></div>
-							</div>
-
-							<!-- Course Info Item -->
-							<div class="course_info_item">
-								<div class="course_info_title">Maksimal ball:</div>
-								<div class="course_info_text"><p>{{max_score}} ball</p></div>
-							</div>
-
-							<!-- Course Info Item -->
-							<div class="course_info_item">
-								<div class="course_info_title">O'rtacha erishilgan:</div>
-								<div class="course_info_text"><p>{{average_score}} ball</p></div>
-							</div>
-
-						</div>
-
-						<!-- Course Tabs -->
-						<div class="course_tabs_container">
-							<div class="tabs d-flex flex-row align-items-center justify-content-start">
-								<div class="tab active">Natijangiz</div>
-								<div class="tab">Urinishlar</div>
-								<div class="tab">Izoh</div>
-							</div>
-							<div class="tab_panels">
-
-								<!-- Curriculum -->
-								<div class="tab_panel active">
-									<div class="tab_panel_content">
-										{% if not score_of_user %}
-										<div class="tab_panel_title text-center">Siz hali ushbu testni bajarmagansiz</div>
-										<div class="tab_panel_content">
-											{% if not test.closed%}
-											<div class="tab_panel_text text-center mt-5">
-												<form action="{% url 'test' test.pk %}" method="post">
-													{% csrf_token %}
-													<button type="submit" class="btn btn-success">Testni bajarish</button>
-												</form>
-											</div>
-											{% endif %}
-											<!-- Dropdowns -->
-											<!--<ul class="dropdowns">
-												<li class="has_children">
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-													<ul>
-														<li>
-															<div class="dropdown_item">
-																<div class="dropdown_item_title"><span>Lecture 1.1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-																<div class="dropdown_item_text">
-																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="dropdown_item">
-																<div class="dropdown_item_title"><span>Lecture 1.2:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-																<div class="dropdown_item_text">
-																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-																</div>
-															</div>
-														</li>
-													</ul>
-												</li>
-												<li class="has_children">
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 2:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-													<ul>
-														<li>
-															<div class="dropdown_item">
-																<div class="dropdown_item_title"><span>Lecture 2.1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-																<div class="dropdown_item_text">
-																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="dropdown_item">
-																<div class="dropdown_item_title"><span>Lecture 2.2:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-																<div class="dropdown_item_text">
-																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-																</div>
-															</div>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 3:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-												</li>
-												<li>
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 4:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-												</li>
-												<li>
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 5:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-												</li>
-											</ul>-->
-										</div>
-										{% else %}
-										<div class="tab_panel_content">
-											<div class="review_rating_container text-center">
-												<div class="review_rating text-center">
-													<div class="review_rating_num">{% widthratio score_of_user.count_of_correct_answers 1 test.point %}</div>
-													<div class="review_rating_stars text-center">
-														<div class="comment_extras d-flex flex-row align-items-center justify-content-center">
-															<div class="comment_extra comment_likes"><p><i class="fa-solid fa-circle-question mr-1"></i> {{test.count_of_questions}} ta</p></div>
-															<div class="comment_extra comment_reply text-success"><p><i class="fa-solid fa-circle-check mr-1"></i> {{score_of_user.count_of_correct_answers}} ta</p></div>
-														</div>
-													</div>
-													<div class="review_rating_text mb-4">{{score_of_user.created_at}}</div>
-												</div>
-											</div>
-										</div>
-										{% endif %}
-									</div>
-								</div>
-								
-								<!-- Reviews -->
-								<div class="tab_panel tab_panel_2">
-									<div class="tab_panel_title">Course Review</div>
-
-									<!-- Rating -->
-									<div class="review_rating_container">
-										<div class="review_rating">
-											<div class="review_rating_num">4.5</div>
-											<div class="review_rating_stars">
-												<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
-											</div>
-											<div class="review_rating_text">(28 Ratings)</div>
-										</div>
-										<div class="review_rating_bars">
-											<ul>
-												<li><span>5 Star</span><div class="review_rating_bar"><div style="width:90%;"></div></div></li>
-												<li><span>4 Star</span><div class="review_rating_bar"><div style="width:75%;"></div></div></li>
-												<li><span>3 Star</span><div class="review_rating_bar"><div style="width:32%;"></div></div></li>
-												<li><span>2 Star</span><div class="review_rating_bar"><div style="width:10%;"></div></div></li>
-												<li><span>1 Star</span><div class="review_rating_bar"><div style="width:3%;"></div></div></li>
-											</ul>
-										</div>
-									</div>
-									
-									<!-- Comments -->
-									<div class="comments_container">
-										<div class="add_comment_container">
-											<div class="add_comment_title">Add a review</div>
-											<div class="add_comment_text">You must be <a href="#">logged</a> in to post a comment.</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Description -->
-								<div class="tab_panel tab_panel_3">
-									<div class="tab_panel_title">{{test.name}}</div>
-									<div class="tab_panel_content">
-										<div class="tab_panel_text">
-											<p>{{test.desc}}</p>
-										</div>
-										<div class="tab_panel_faq">
-											<div class="tab_panel_title">Tez-tez so'raladigan savollar</div>
-
-											<!-- Accordions -->
-											<div class="accordions">
-												
-												<div class="elements_accordions">
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>Can I just enroll in a single course?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center active"><div>I'm not interested in the entire Specialization?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>What is the refund policy?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>What background knowledge is necessary?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>Do i need to take the courses in a specific order?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>																
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Course Sidebar -->
-				<div class="col-lg-4">
-					<div class="sidebar">
-
-						<!-- Feature -->
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Ma'lumotlar</div>
-							<div class="sidebar_feature">
-								{% if test.closed %}
-									<div class="course_price text-warning">Yakunlangan</div>
-								{% else %}
-									<div class="course_price text-success">Ochiq</div>
-								{% endif %}
-								<!-- Features -->
-								<div class="feature_list">
-
-									<!-- Feature -->
-									<div class="feature d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_title"><i class="fa-solid fa-signal"></i><span>Darajasi:</span></div>
-										<div class="feature_text ml-auto">{{test.level}}</div>
-									</div>
-
-									<!-- Feature -->
-									<div class="feature d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_title"><i class="fa-solid fa-circle-question"></i><span>Savollar:</span></div>
-										<div class="feature_text ml-auto">{{test.count_of_questions}} ta</div>
-									</div>
-
-									<!-- Feature -->
-									<div class="feature d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_title"><i class="fa-solid fa-hashtag"></i><span>Bloklar:</span></div>
-										<div class="feature_text ml-auto">{{test.count_of_subjects}} ta</div>
-									</div>
-
-									<!-- Feature -->
-									<div class="feature d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_title"><i class="fa-solid fa-language"></i><span>Til:</span></div>
-										<div class="feature_text ml-auto">{{test.language}}</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-						<!-- Feature -->
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Muallif</div>
-							<div class="sidebar_teacher">
-								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div class="teacher_image"><img src="{% static 'images/user.png' %}" alt=""></div>
-									<div class="teacher_title">
-										<div class="teacher_name"><a href="javascript:void(0)">Testmania</a></div>
-										<div class="teacher_position">testmania.uz</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+			<div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
+			  <p>
+				Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice cream. Gummies
+				halvah
+				tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream cheesecake fruitcake.
+			  </p>
+			  <p class="mb-0">
+				Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah cotton candy
+				liquorice caramels.
+			  </p>
+			</div>
+			<div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
+			  <p>{{test.desc}}</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <div class="col-lg-4">
+		<div class="card">
+			<div class="card-body">
+				<h3 class="text-success">Ochiq</h3>
+				<div class="demo-inline-spacing mt-3">
+					<div class="table text-nowrap">
+						<table class="table table-hover">
+						  <tbody class="table-border-bottom-0">
+							<tr>
+								<td><i class="fa-solid fa-circle-question me-3"></i><strong>Savollar</strong></td>
+								<td>{{test.count_of_questions}} ta</td>
+							</tr>
+							<tr>
+								<td><i class="fa-solid fa-hashtag me-4"></i><strong>Bloklar</strong></td>
+								<td>{{test.count_of_subjects}} ta</td>
+							</tr>
+							<tr>
+							  <td><i class="fa-solid fa-signal me-3"></i><strong>Darajasi</strong></td>
+							  <td>{{test.level}}</td>
+							</tr>
+							<tr>
+								<td><i class="fa-solid fa-language me-3"></i><strong>Til</strong></td>
+								<td>{{test.language}}</td>
+							  </tr>
+						  </tbody>
+						</table>
+					  </div>
 				</div>
 			</div>
 		</div>
+      </div>
 	</div>
-</body>
-</html>
+</div>
 {% endblock content %}
