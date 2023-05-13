@@ -6,50 +6,66 @@
 	<div class="row">
 	  <div class="col-lg-8">
 		<div class="nav-align-top mb-4">
-		  <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
-			<li class="nav-item">
-			  <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home" aria-selected="true"><i class="tf-icons bx bx-user-pin"></i> Natijangiz</button>
-			</li>
-			<li class="nav-item">
-			  <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-profile" aria-controls="navs-pills-justified-profile" aria-selected="false"><i class="tf-icons bx bx-stats"></i> Statistika</button>
-			</li>
-			<li class="nav-item">
-			  <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-messages" aria-controls="navs-pills-justified-messages" aria-selected="false"><i class="tf-icons bx bx-message-square"></i> Izoh</button>
-			</li>
-		  </ul>
-		  <div class="tab-content">
-			<div class="tab-pane fade active show" id="navs-pills-justified-home" role="tabpanel">
-				<div class="text-center">
-					{% if score_of_user%}
-					<h6>Sizning natijangiz</h6>
-					<h5 class="fw-bold text-center mt-3 mb-3" style="font-size: 70px;">{{score_of_user.result}}</h5>
-					<span class="text-primary mx-3" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="bottom" data-bs-html="true" title="" data-bs-original-title="<span>Barcha savollar soni</span>"><i class="fa-solid fa-circle-question"></i> {{test.count_of_questions}} </span>
-					<span class="text-success mx-3" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="bottom" data-bs-html="true" title="" data-bs-original-title="<span>To'g'ri javoblar soni</span>"><i class="fa-solid fa-circle-check"></i> 8</span>
-					{% else %}
-					<h6>Siz ushbu testni bajarmagansiz</h6>
-					<h5 class="fw-bold text-center mt-3 mb-3" style="font-size: 70px;">{{score_of_user.result}}</h5>
-					<form action="" method="post">
-						{% csrf_token %}
-						<button type="submit" class="btn btn-success">Testni bajarish</button>
-					</form>
-					{% endif %}
+			<div class="card mb-5">
+				<div class="card-group">
+					<div class="card-body">
+						<h5 class="card-title">Urinishlar</h5>
+						<p class="card-text">{{attempts}} ta</p>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">Maksimal ball</h5>
+						<p class="card-text">{{max_score}}</p>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">O'rtacha erishilgan</h5>
+						<p class="card-text">{{average_score}}</p>
+					</div>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
-			  <p>
-				Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice cream. Gummies
-				halvah
-				tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream cheesecake fruitcake.
-			  </p>
-			  <p class="mb-0">
-				Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah cotton candy
-				liquorice caramels.
-			  </p>
+			<ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+				<li class="nav-item">
+				<button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home" aria-selected="true"><i class="tf-icons bx bx-user-pin"></i> Natijangiz</button>
+				</li>
+				<li class="nav-item">
+				<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-profile" aria-controls="navs-pills-justified-profile" aria-selected="false"><i class="tf-icons bx bx-stats"></i> Statistika</button>
+				</li>
+				<li class="nav-item">
+				<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-messages" aria-controls="navs-pills-justified-messages" aria-selected="false"><i class="tf-icons bx bx-message-square"></i> Izoh</button>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade active show" id="navs-pills-justified-home" role="tabpanel">
+					<div class="text-center">
+						{% if score_of_user%}
+						<h6>Sizning natijangiz</h6>
+						<h5 class="fw-bold text-center mt-3 mb-3" style="font-size: 70px;">{{score_of_user.result}}</h5>
+						<span class="text-primary mx-3" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="bottom" data-bs-html="true" title="" data-bs-original-title="<span>Barcha savollar soni</span>"><i class="fa-solid fa-circle-question"></i> {{test.count_of_questions}} </span>
+						<span class="text-success mx-3" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="bottom" data-bs-html="true" title="" data-bs-original-title="<span>To'g'ri javoblar soni</span>"><i class="fa-solid fa-circle-check"></i> {{score_of_user.count_of_correct_answers}}</span>
+						{% else %}
+						<h6>Siz ushbu testni bajarmagansiz</h6>
+						<h5 class="fw-bold text-center mt-3 mb-3" style="font-size: 70px;">{{score_of_user.result}}</h5>
+						<form action="" method="post">
+							{% csrf_token %}
+							<button type="submit" class="btn btn-success">Testni boshlash</button>
+						</form>
+						{% endif %}
+					</div>
+				</div>
+				<div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
+				<p>
+					Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice cream. Gummies
+					halvah
+					tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream cheesecake fruitcake.
+				</p>
+				<p class="mb-0">
+					Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah cotton candy
+					liquorice caramels.
+				</p>
+				</div>
+				<div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
+				<p>{{test.desc}}</p>
+				</div>
 			</div>
-			<div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
-			  <p>{{test.desc}}</p>
-			</div>
-		  </div>
 		</div>
 	  </div>
 	  <div class="col-lg-4">

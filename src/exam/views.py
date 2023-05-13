@@ -63,14 +63,16 @@ def CheckAnswers(request, pk):
         test = Test.objects.get(id=pk)
         answers = request.POST.get('answers')
         checked_correct_answers = CheckTest(test.answers, str(answers), test.count_of_questions)
-        test_score = TestScore(test=test, 
-                               count_of_questions=test.count_of_questions,
-                               count_of_correct_answers = checked_correct_answers,
-                               user=request.user,
-                               result=checked_correct_answers * test.point)
-        test_score.save(force_insert=True)
-        request.method = 'GET'
-        return GetTest(request, pk)
+        testScores = TestScore.objects.values_list('user')
+        if request.user not in testScores:
+            test_score = TestScore(test=test, 
+                                    count_of_questions=test.count_of_questions,
+                                    count_of_correct_answers = checked_correct_answers,
+                                    user=request.user,
+                                    result=checked_correct_answers * test.point)
+            test_score.save(force_insert=True)
+            request.method = 'GET'
+            return GetTest(request, pk)
     
 def CheckTest(correct_answers: str, options: str, count: int) -> int:
     counter = 0
