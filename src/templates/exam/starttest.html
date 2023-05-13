@@ -1,93 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
-<!DOCTYPE html>
 {% load static %}
-<html lang="en">
-<head>
-    <title>{% block title %}{{test.name}}{% endblock title %}</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Unicat project">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/course.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/course_responsive.css' %}">
-</head>
-<body>
-
-	<div class="home">
-		<div class="breadcrumbs_container">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="breadcrumbs">
-							<ul>
-								<li><a href="{% url 'home' %}">Bosh sahifa</a></li>
-								<li><a href="{% url 'tests' %}">Testlar</a></li>
-								<li>{{test.name}}</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>			
-	</div>
-
-	<div class="course">
-		<div class="container">
-			<div class="row">
-				<!-- Test -->
-				<div class="col-lg-12">
-					<div class="course_container">
-						<div class="course_title">{{test.name}}</div>
-                        <a href="{% url 'getfile' test.pk %}" class="btn btn-info mt-3">
-                            <i class="fa-solid fa-book mr-1"></i> Savollar kitobi
-                        </a>
-                        <div class="table-responsive mt-5">
-                            <table class="table table-hover text-center table-bordered align-middle">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">A</th>
-                                    <th scope="col">B</th>
-                                    <th scope="col">C</th>
-                                    <th scope="col">D</th>
-                                  </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                    {% for a in test.answers %}
-                                        <tr class="countOfanswerRows">
-                                            <th scope="row">{{forloop.counter}}</th>
-                                            <td>  
-                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="a">
-                                            </td>
-                                            <td>  
-                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="b">
-                                            </td>
-                                            <td>  
-                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="c">
-                                            </td>
-                                            <td>  
-                                                <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="d">
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <form action="{% url 'checkanswers' test.pk %}" method="post" id="answersForm">
-                                {% csrf_token %}
-                                <input type="text" name="answers" id="answers" hidden>
-                                <button type="submit" class="btn btn-success mt-4" hidden></button>
-                            </form>
-                            <button class="btn btn-success mt-4" onclick="checkTest()">Testni yakunlash</button>
-                        </div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-<script> 
-</script>
-<script src="{% static 'js/test.js' %}"></script>
-</body>
-</html>
+<div class="container-xxl flex-grow-1 container-p-y">      
+	<h4 class="fw-bold py-3 mb-4">{{test.name}}</h4>
+    <a href="{% url 'getfile' test.pk %}" class="btn btn-info mb-4">
+        <i class="fa-solid fa-book mr-1"></i> Savollar kitobi
+    </a>
+	<div class="card">
+        <div class="table-responsive text-nowrap table-hover">
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                {% for a in test.answers %}
+                <tr class="countOfanswerRows">
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>  
+                        <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="a">
+                    </td>
+                    <td>  
+                        <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="b">
+                    </td>
+                    <td>  
+                        <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="c">
+                    </td>
+                    <td>  
+                        <input class="form-check-input" type="radio" name="a{{forloop.counter}}" value="d">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form action="{% url 'checkanswers' test.pk %}" method="post" id="answersForm">
+            {% csrf_token %}
+            <input type="text" name="answers" id="answers" hidden>
+            <button type="submit" class="btn btn-success mt-4" hidden></button>
+        </form>
+        </div>
+    </div>
+    <div id="test_alert">
+    </div>
+    <button class="btn btn-primary mt-4" onclick="checkTest()">Testni yakunlash</button>
+</div>
 {% endblock content %}
