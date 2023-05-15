@@ -75,7 +75,6 @@ def CheckAnswers(request, pk):
         request.method = 'GET'
         return GetTest(request, pk)
 
-@login_required(login_url="/account/login/")   
 def CheckTest(correct_answers: str, options: str, count: int) -> int:
     counter = 0
     for i in range(0, count):

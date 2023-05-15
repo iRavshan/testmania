@@ -16,14 +16,23 @@
           <!-- Account -->
           <div class="card-body">
             <div class="d-flex align-items-start align-items-sm-center gap-4">
+              {% if user.avatar %}
               <img
                 src="/uploads/{{user.avatar}}"
-                alt="user-avatar"
+                alt="{{user.first_name}} {{user.last_name}}"
                 class="d-block rounded"
                 height="100"
                 width="100"
-                id="uploadedAvatar"
-              />
+                id="uploadedAvatar"/>
+              {% else %}
+              <img
+                src="{% static 'assets/img/user.png'%}"
+                alt="{{user.first_name}} {{user.last_name}}"
+                class="d-block rounded"
+                height="100"
+                width="100"
+                id="uploadedAvatar"/>
+              {% endif %}
               <div class="button-wrapper">
                 <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                   <span class="d-none d-sm-block">Rasm yuklash</span>
