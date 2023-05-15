@@ -41,10 +41,12 @@ def Login(request):
         return redirect('login')
     return render(request, 'account/login.html')
 
+@login_required(login_url="/account/login/")
 def Logout(request):
     logout(request)
     return render(request, 'account/login.html')
 
+@login_required(login_url="/account/login/")
 def Settings(request):
     user = CustomUser.objects.get(id=request.user.id)
     context={

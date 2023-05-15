@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.db.models import Q
 from .models import Test, TestScore
 from account.models import CustomUser
+from django.contrib.auth.decorators import login_required
 
 def Home(request):
     tests = Test.objects.all().order_by('-created_at')
@@ -27,7 +28,8 @@ def Home(request):
     context['search_text'] = search_text,
     context['tests'] = search_results
     return render(request, 'exam/home.html', context)
-    
+
+@login_required(login_url="/account/login/")
 def GetTest(request, pk):
     test = Test.objects.get(id=pk)
 
@@ -58,6 +60,7 @@ def GetTest(request, pk):
         
         return render(request, 'exam/starttest.html', {'test':test})
 
+@login_required(login_url="/account/login/")
 def CheckAnswers(request, pk):
     if request.method == 'POST':
         test = Test.objects.get(id=pk)
@@ -71,7 +74,8 @@ def CheckAnswers(request, pk):
         test_score.save(force_insert=True)
         request.method = 'GET'
         return GetTest(request, pk)
-    
+
+@login_required(login_url="/account/login/")   
 def CheckTest(correct_answers: str, options: str, count: int) -> int:
     counter = 0
     for i in range(0, count):
@@ -79,6 +83,7 @@ def CheckTest(correct_answers: str, options: str, count: int) -> int:
             counter += 1
     return counter
 
+@login_required(login_url="/account/login/")
 def SendFile(request, pk):
     test = Test.objects.get(id=pk)
     try:
