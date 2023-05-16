@@ -157,3 +157,20 @@
   margin-right: 4px;
 }
 
+.top-rating-footer{
+  border-radius: 0 0 6px 6px;
+  padding: 1rem 16px;
+  border-top: 1px solid rgba(105, 122, 141, .2);
+}
+
+.top-rating-footer a{
+  font-size: 13px;
+}
+
+.top-rating-footer a:hover{
+  text-decoration: underline ;
+}
+
+.top-rating-footer a i{
+  margin-left: .25rem;
+}

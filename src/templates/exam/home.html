@@ -11,13 +11,16 @@
         <div class="row">
           <div class="col-md-6 col-lg-12 mb-3">
             <div class="card h-100">
-              <img class="card-img-top" src="{% static 'assets/img/backgrounds/test-bg.jpg' %}" alt="Card image cap" />
+              <!--<img class="card-img-top" src="{% static 'assets/img/backgrounds/test-bg.jpg' %}" alt="Card image cap" />-->
               <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'test' test.pk %}">{{test.name}}</a></h5>
                 <p class="card-text"> 
                   {{test.desc|truncatechars:200}}
                 </p>
-                <a href="{% url 'test' test.pk %}" class="btn btn-outline-primary">Boshlash</a>
+                <div class="flex">
+                  <a href="{% url 'test' test.pk %}" class="btn btn-outline-primary">Boshlash <i class="fa-solid fa-arrow-up-right-from-square mx-1"></i></a>
+                  <button class="btn float-end" style="border: none;"><i class="fa-regular fa-bookmark"></i></button>
+                </div>
               </div>
             </div>
           </div>
@@ -85,7 +88,7 @@
               </div>
             </div>
             <div class="top-rating-footer">
-              
+              <a href="#">Reytingni to'liq ko'rish <i class="fa-solid fa-angle-right"></i></a>
             </div>
           </div>
         </div>
