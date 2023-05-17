@@ -1,33 +1,24 @@
 from django.shortcuts import render, redirect, HttpResponse
-from django.db.models import Q
+from django.db.models import Q, Sum
 from .models import Test, TestScore
 from account.models import CustomUser
 from django.contrib.auth.decorators import login_required
 
+
 def Home(request):
     tests = Test.objects.all().order_by('-created_at')
-
+    users = CustomUser.objects.all()
+    for user in users:
+        testScores = TestScore.objects.filter(user=user).values()
+        sum_of_testScores = testScores.aggregate(Sum('result'))
+        user.result = sum_of_testScores['result__sum']
+    users = users[:4]
     context = {
-        'tests': tests
+        'tests': tests,
+        'top_rating': users
     }
-
     if request.method == 'GET':
         return render(request, 'exam/home.html', context)
-    
-    search_text = request.POST.get('search_input')
-    if len(search_text)==0:
-        return render(request, 'exam/home.html', context)
-    search_texts = search_text.split()
-    search_results = []
-    for text in search_texts:
-        results = tests.filter(Q(name__icontains=text) | Q(desc__icontains=text))
-        for result in results:
-            if result not in search_results:
-                search_results.append(result)
-                
-    context['search_text'] = search_text,
-    context['tests'] = search_results
-    return render(request, 'exam/home.html', context)
 
 @login_required(login_url="/account/login/")
 def GetTest(request, pk):

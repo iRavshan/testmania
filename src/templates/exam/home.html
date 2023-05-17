@@ -38,54 +38,24 @@
               <h3>Eng yuqori reytingda</h3>
             </div>
             <div class="top-rating">
+              {% for top_user in top_rating %}
               <div class="single-top">
                 <div class="single-top-avatar">
-                  <img src="/uploads/{{user.avatar}}" alt="" class="rounded-circle" style="width: 52px; height: 52px;">
+                  {% if top_user.avatar %}
+                  <img src="/uploads/{{user.avatar}}" alt="{{top_user.first_name}} {{top_user.last_name}}" class="rounded-circle" style="width: 52px; height: 52px;">
+                  {% else %}
+                  <img src="{% static 'assets/img/user.png' %}" alt="{{top_user.first_name}} {{top_user.last_name}}" class="rounded-circle" style="width: 52px; height: 52px;">
+                  {% endif %}
                 </div>
                 <div class="single-top-info">
                   <h4 class="fullname mb-0">
-                    <a href="#">{{user.first_name}} {{user.last_name}}</a>
-                    <span class="username mx-0">{{user.username}}</span>
+                    <a href="#">{{top_user.first_name}} {{top_user.last_name}}</a>
+                    <span class="username mx-0">{{top_user.username}}</span>
                   </h4>
-                  <p class="points"><i class="fa-solid fa-star"></i>1590</p>
+                  <p class="points"><i class="fa-solid fa-star"></i>{{top_user.result}}</p>
                 </div>
               </div>
-              <div class="single-top">
-                <div class="single-top-avatar">
-                  <img src="/uploads/{{user.avatar}}" alt="" class="rounded-circle" style="width: 52px; height: 52px;">
-                </div>
-                <div class="single-top-info">
-                  <h4 class="fullname mb-0">
-                    <a href="#">{{user.first_name}} {{user.last_name}}</a>
-                    <span class="username mx-0">{{user.username}}</span>
-                  </h4>
-                  <p class="points"><i class="fa-solid fa-star"></i>1590</p>
-                </div>
-              </div>
-              <div class="single-top">
-                <div class="single-top-avatar">
-                  <img src="/uploads/{{user.avatar}}" alt="" class="rounded-circle" style="width: 52px; height: 52px;">
-                </div>
-                <div class="single-top-info">
-                  <h4 class="fullname mb-0">
-                    <a href="#">{{user.first_name}} {{user.last_name}}</a>
-                    <span class="username mx-0">{{user.username}}</span>
-                  </h4>
-                  <p class="points"><i class="fa-solid fa-star"></i>1590</p>
-                </div>
-              </div>
-              <div class="single-top">
-                <div class="single-top-avatar">
-                  <img src="/uploads/{{user.avatar}}" alt="" class="rounded-circle" style="width: 52px; height: 52px;">
-                </div>
-                <div class="single-top-info">
-                  <h4 class="fullname mb-0">
-                    <a href="#">{{user.first_name}} {{user.last_name}}</a>
-                    <span class="username mx-0">{{user.username}}</span>
-                  </h4>
-                  <p class="points"><i class="fa-solid fa-star"></i>1590</p>
-                </div>
-              </div>
+              {% endfor %}
             </div>
             <div class="top-rating-footer">
               <a href="#">Reytingni to'liq ko'rish <i class="fa-solid fa-angle-right"></i></a>
