@@ -42,14 +42,14 @@
               <div class="single-top">
                 <div class="single-top-avatar">
                   {% if top_user.avatar %}
-                  <img src="/uploads/{{user.avatar}}" alt="{{top_user.first_name}} {{top_user.last_name}}" class="rounded-circle" style="width: 52px; height: 52px;">
+                  <img src="/uploads/{{top_user.avatar}}" alt="{{top_user.first_name}} {{top_user.last_name}}" class="rounded-circle" style="width: 52px; height: 52px;">
                   {% else %}
                   <img src="{% static 'assets/img/user.png' %}" alt="{{top_user.first_name}} {{top_user.last_name}}" class="rounded-circle" style="width: 52px; height: 52px;">
                   {% endif %}
                 </div>
                 <div class="single-top-info">
                   <h4 class="fullname mb-0">
-                    <a href="#">{{top_user.first_name}} {{top_user.last_name}}</a>
+                    <a href="{% url 'profile' top_user.username %}">{{top_user.first_name}} {{top_user.last_name}}</a>
                     <span class="username mx-0">{{top_user.username}}</span>
                   </h4>
                   <p class="points"><i class="fa-solid fa-star"></i>{{top_user.result}}</p>

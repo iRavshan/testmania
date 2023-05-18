@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} {{user.first_name}} {{user.last_name}} (@{{user.username}}) {% endblock title %}
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1>{{user.first_name}} {{user.last_name}}</h1>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

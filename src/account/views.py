@@ -53,3 +53,11 @@ def Settings(request):
         'user': user
     }
     return render(request, 'account/settings.html', context)
+
+
+def Profile(request, username):
+    user = CustomUser.objects.get(username=username)
+    context = {
+        'user': user
+    }
+    return render(request, 'account/profile.html', context)
