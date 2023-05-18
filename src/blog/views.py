@@ -8,8 +8,8 @@ def Home(request):
     }
     return render(request, 'blog/blog.html', context)
 
-def SingleBlog(request, pk):
-    post = Post.objects.get(id=pk)
+def SingleBlog(request, id):
+    post = Post.objects.get(id=id)
     context = {
         'post': post
     }

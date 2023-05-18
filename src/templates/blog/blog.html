@@ -3,22 +3,31 @@
 <!DOCTYPE html>
 {% load static %}
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4">Yangiliklar</h4>
-    <div class="row mb-5">
-      {% if posts %}
-      {% for post in posts %}
-      <div class="col-md-6 col-lg-4 mb-3">
-        <div class="card h-100">
-          <img class="card-img-top" src="/uploads/{{post.thumbnail}}" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title"><a href="{% url 'post' post.id %}">{{post.title}}</a></h5>
-            <p class="card-text">{{post.description|safe|truncatechars:200}}</p>
-            <a href="{% url 'post' post.id %}" class="btn btn-outline-primary">Batafsil</a>
+  <div class="row mb-5">
+    <div class="col-lg-8">
+        <h4 class="fw-bold py-3 mb-4">Yangiliklar</h4>
+        {% if posts %}
+        {% for post in posts %}
+        <div class="row">
+          <div class="col-md-6 col-lg-12 mb-3">
+            <div class="card h-100">
+              <!--<img class="card-img-top" src="{% static 'assets/img/backgrounds/test-bg.jpg' %}" alt="Card image cap" />-->
+              <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'post' post.id %}">{{post.title}}</a></h5>
+                <p class="card-text"> 
+                  {{post.description|safe|truncatechars:200}}
+                </p>
+                <div class="flex">
+                  <a href="{% url 'post' post.id %}" class="btn btn-outline-primary">Batafsil <i class="fa-solid fa-arrow-up-right-from-square mx-1"></i></a>
+                  <button class="btn float-end" style="border: none;"><i class="fa-regular fa-bookmark"></i></button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      {% endfor %}
-      {% endif %}
+        {% endfor %}
+        {% endif %}
     </div>
+  </div>
 </div>
 {% endblock content %}
