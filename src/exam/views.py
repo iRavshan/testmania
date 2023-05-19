@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.db.models import Q, Sum
-from .models import Test, TestScore
+from .models import Test, TestScore, Subject
 from account.models import CustomUser
 from django.contrib.auth.decorators import login_required
 
@@ -15,7 +15,9 @@ def Home(request):
     users = users[:4]
     context = {
         'tests': tests,
-        'top_rating': users
+        'top_rating': users,
+        'subjects': Subject.objects.all().order_by('name'),
+        'levels': Test.objects.values_list()
     }
     if request.method == 'GET':
         return render(request, 'exam/home.html', context)

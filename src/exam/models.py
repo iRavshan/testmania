@@ -2,6 +2,12 @@ from django.db import models
 from account.models import CustomUser
 import uuid
 
+class Subject(models.Model):
+    name = models.CharField(max_length=60, null=False)
+
+    def __str__(self) -> str:
+        return self.name
+
 class Test(models.Model):
     class Language(models.TextChoices):
         UZ = "o'zbek",
@@ -26,6 +32,7 @@ class Test(models.Model):
     language = models.TextField(choices=Language.choices, default=Language.UZ)
     level = models.TextField(choices=Level.choices, default=Level.MEDIUM)
     point = models.FloatField(default=1)
+    subjects = models.ManyToManyField(Subject)
 
     def __str__(self) -> str:
         return self.name
@@ -44,5 +51,3 @@ class TestScore(models.Model):
 
     def __str__(self) -> str:
         return str(self.count_of_correct_answers * self.test.point)
-
-

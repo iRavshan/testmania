@@ -5,7 +5,37 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row mb-5">
       <div class="col-lg-8">
-        <h4 class="fw-bold py-3 mb-4">Testlar</h4>
+        <div class="mb-4 d-flex align-items-center justify-content-between py-3">
+          <h4 class="fw-bold">Testlar</h4>
+          <button class="btn btn-primary px-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd"><i class="fa-solid fa-filter me-1"></i> Saralash</button>
+        </div>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel" style="visibility: hidden;" aria-hidden="true">
+          <div class="offcanvas-header">
+            <h5 id="offcanvasEndLabel" class="offcanvas-title">Saralash</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body mx-0 flex-grow-0">
+            <div class="col-lg-12">
+              <form action="" method="post">
+                <small class="text-light fw-semibold">Fanlar</small>
+                <div class="demo-inline-spacing mt-3 mb-3">
+                  <div class="list-group">
+                    {% if subjects %}
+                    {% for subject in subjects %}
+                    <label class="list-group-item">
+                      <input class="form-check-input me-1" type="checkbox" value="{{subject.name}}">
+                      {{subject.name}}
+                    </label>
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary mb-2 d-grid w-100">Saralash</button>
+                <button type="button" class="btn btn-outline-secondary d-grid w-100" data-bs-dismiss="offcanvas">Bekor qilish</button>
+              </form>
+            </div>            
+          </div>
+        </div>
         {% if tests %}
         {% for test in tests %}
         <div class="row">
@@ -14,9 +44,14 @@
               <!--<img class="card-img-top" src="{% static 'assets/img/backgrounds/test-bg.jpg' %}" alt="Card image cap" />-->
               <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'test' test.pk %}">{{test.name}}</a></h5>
-                <p class="card-text"> 
+                <p class="card-text mb-0"> 
                   {{test.desc|truncatechars:200}}
                 </p>
+                <div class="demo-inline-spacing mb-3 mt-0">
+                  {% for subject in test.subjects.all %}
+                  <span class="badge bg-label-primary">{{subject.name}}</span>
+                  {% endfor %}
+                </div>
                 <div class="flex">
                   <a href="{% url 'test' test.pk %}" class="btn btn-outline-primary">Boshlash <i class="fa-solid fa-arrow-up-right-from-square mx-1"></i></a>
                   <button class="btn float-end" style="border: none;"><i class="fa-regular fa-bookmark"></i></button>
