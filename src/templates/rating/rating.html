@@ -11,7 +11,7 @@
             <tr>
               <th>#</th>
               <th>Foydalanuvchi</th>
-              <th>Users</th>
+              <th>Ta'lim markazi</th>
               <th>Natija</th>
             </tr>
           </thead>
@@ -20,22 +20,14 @@
             <tr>
               <td>{{forloop.counter}}</td>
               <td>
-                <img src="/uploads/{{user.avatar}}" class="rounded-circle" style="width: 32px; height: 32px; margin-right: 7px;" alt="{{user.first_name}} {{user.last_name}}">
+                <img src="/uploads/{{user.avatar}}" class="rounded-circle" style="width: 35px; height: 35px; margin-right: 7px;" alt="{{user.first_name}} {{user.last_name}}">
                 <a href="{% url 'profile' user.username %}">{{user.first_name}} {{user.last_name}}</a>
               </td>
-              <td>
-                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Lilian Fuller">
-                    <img src="../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-                  </li>
-                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Sophia Wilkerson">
-                    <img src="../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                  </li>
-                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Christina Parker">
-                    <img src="../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-                  </li>
-                </ul>
-              </td>
+              {% if user.study_center %}
+              <td>{{user.study_center}}</td>
+              {% else %}
+              <td>Ko'rsatilmagan</td>
+              {% endif %}
               <td><i class="fa-solid fa-star me-1"></i>0</td>
             </tr>
             {% endfor %}

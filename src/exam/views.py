@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.db.models import Q, Sum
 from .models import Test, TestScore, Subject
 from account.models import CustomUser
@@ -8,10 +8,6 @@ from django.core.paginator import Paginator
 def Home(request):
     tests = Test.objects.all().order_by('-created_at')
     users = CustomUser.objects.all()
-    p = Paginator(CustomUser.objects.all(), 3)
-    page = request.GET.get('page')
-    all_users = p.get_page(page)
-
     for user in users:
         testScores = TestScore.objects.filter(user=user).values()
         sum_of_testScores = testScores.aggregate(Sum('result'))
@@ -28,8 +24,7 @@ def Home(request):
 
 @login_required(login_url="/account/login/")
 def GetTest(request, pk):
-    test = Test.objects.get(id=pk)
-
+    test = get_object_or_404(Test, id=pk)
     if test is not None:
         if request.method == 'GET':
             all_attempts = TestScore.objects.filter(test=test)

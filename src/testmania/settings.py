@@ -25,10 +25,11 @@ SECRET_KEY = 'django-insecure-mk9o(owy=#o=r&650x8essq653rkh9zk#^thc&m!r^rz00vce)
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'testmania.up.railway.app',
-    'localhost'
-]
+ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = [
+#    'testmania.up.railway.app',
+#    'localhost'
+#]
 
 CSRF_TRUSTED_ORIGINS = ['https://testmania.up.railway.app']
 
@@ -104,6 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS':{
+            'min_length': 5,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
