@@ -76,11 +76,7 @@
               {% for top_user in top_rating %}
               <div class="single-top">
                 <div class="single-top-avatar">
-                  {% if top_user.avatar %}
                   <img src="/uploads/{{top_user.avatar}}" alt="{{top_user.first_name}} {{top_user.last_name}}" class="rounded-circle" style="width: 52px; height: 52px;">
-                  {% else %}
-                  <img src="{% static 'assets/img/user.png' %}" alt="{{top_user.first_name}} {{top_user.last_name}}" class="rounded-circle" style="width: 52px; height: 52px;">
-                  {% endif %}
                 </div>
                 <div class="single-top-info">
                   <h4 class="fullname mb-0">
