@@ -3,11 +3,15 @@ from django.db.models import Q, Sum
 from .models import Test, TestScore, Subject
 from account.models import CustomUser
 from django.contrib.auth.decorators import login_required
-
+from django.core.paginator import Paginator
 
 def Home(request):
     tests = Test.objects.all().order_by('-created_at')
     users = CustomUser.objects.all()
+    p = Paginator(CustomUser.objects.all(), 3)
+    page = request.GET.get('page')
+    all_users = p.get_page(page)
+
     for user in users:
         testScores = TestScore.objects.filter(user=user).values()
         sum_of_testScores = testScores.aggregate(Sum('result'))

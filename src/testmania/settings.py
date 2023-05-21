@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'exam',
     'admin_honeypot',
     'blog',
+    'rating',
     'ckeditor'
 ]
 
