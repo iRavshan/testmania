@@ -24,7 +24,26 @@
 				</div>
 			  </div>
 			</div>
-		  </div>
+		</div>
+		{% if related_to_topic %}
+		<div class="card pb-2">
+			<h5 class="card-header">Mavzuga doir</h5>
+			<div class="px-3">
+				<div class="row">
+					{% for re_post in related_to_topic %}
+					<div class="col-md-6 col-xl-4">
+						<div class="mb-2">
+							<img class="card-img-top" src="/uploads/{{re_post.thumbnail}}" alt="{{re_post.title}}">
+							<div class="py-3">
+								<h5 class="card-title" style="line-height: 1.4;"><a href="{% url 'post' re_post.id %}">{{re_post.title|truncatechars:70}}</a></h5>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
 	  </div>
       {% endif %}
     </div>
