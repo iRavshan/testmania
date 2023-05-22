@@ -13,7 +13,7 @@ def SingleBlog(request, id):
     post = get_object_or_404(Post, id=id)
     tags = post.tags.all()
     related_to_topic = []
-    similar_posts = Post.objects.filter(tags__name__icontains=tags[0].name)
+    similar_posts = Post.objects.filter(tags__name__icontains=tags[0].name)[:3]
     context = {
         'post': post,
         'related_to_topic': similar_posts
