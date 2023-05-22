@@ -13,14 +13,16 @@
 			<div class="card-body">
 			  <div class="row gy-3">
 				<div class="col-md">
-				  {{post.description|safe}}
-				{% if post.tags %}
-				<div class="demo-inline-spacing">
-					{% for tag in post.tags.all %}
-					<span class="badge bg-label-primary">{{tag.name}}</span>
-					{% endfor %}
-				</div>
-				{% endif %}
+				  	{{post.description|safe}}
+					{% if post.tags %}
+					<div class="demo-inline-spacing mb-4">
+						{% for tag in post.tags.all %}
+						<span class="badge bg-label-primary">{{tag.name}}</span>
+						{% endfor %}
+					</div>
+					{% endif %}
+					<hr/>
+					<a href="https://t.me/testmaniauz" target="_blank" class="btn btn-primary w-100 mt-2" style="background-color: #00A9E6; box-shadow: none; border: none;"><i class="fa-solid fa-paper-plane me-2"></i>Yangiliklarni telegram kanalimizda ham kuzatib boring</a>
 				</div>
 			  </div>
 			</div>
@@ -35,7 +37,7 @@
 						<div class="mb-2">
 							<img class="card-img-top" src="/uploads/{{re_post.thumbnail}}" alt="{{re_post.title}}">
 							<div class="py-3">
-								<h5 class="card-title" style="line-height: 1.4;"><a href="{% url 'post' re_post.id %}">{{re_post.title|truncatechars:70}}</a></h5>
+								<h5 class="card-title" style="line-height: 1.4;"><a href="{% url 'post' re_post.id %}">{{re_post.title|truncatechars:80}}</a></h5>
 							</div>
 						</div>
 					</div>
