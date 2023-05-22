@@ -4,7 +4,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateProfile
 from .models import CustomUser
 
 def Register(request):
@@ -41,19 +41,19 @@ def Login(request):
         return redirect('login')
     return render(request, 'account/login.html')
 
-@login_required(login_url="/account/login/")
+@login_required(login_url="/account/login")
 def Logout(request):
     logout(request)
     return render(request, 'account/login.html')
 
-@login_required(login_url="/account/login/")
+@login_required(login_url="/account/login")
 def Settings(request):
-    user = CustomUser.objects.get(id=request.user.id)
-    context={
-        'user': user
-    }
-    return render(request, 'account/settings.html', context)
-
+    if request.method == 'GET':
+        user = CustomUser.objects.get(id=request.user.id)
+        context={
+            'user': user
+        }
+        return render(request, 'account/settings.html', context)
 
 def Profile(request, username):
     user = CustomUser.objects.get(username=username)
@@ -61,3 +61,13 @@ def Profile(request, username):
         'user': user
     }
     return render(request, 'account/profile.html', context)
+
+
+def Delete(request, username):
+    if request.method == 'POST':
+        try:
+            user = CustomUser.objects.get(username=username)
+            user.delete()
+        except:
+            messages.error(request, 'The user not found')
+        return redirect('/')

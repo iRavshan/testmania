@@ -5,6 +5,18 @@
 <div class="container-xxl flex-grow-1 container-p-y">      
     <h4 class="fw-bold py-3 mb-4">Reyting</h4>
     <div class="card">
+      <form action="{% url 'rating' %}" method="post" class="py-4 px-3">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-10 col-md-12">
+              <input type="text" class="form-control mb-3" value="{{searchUsertext}}" id="searchUser" name="searchUser" placeholder="Foydalanuvchi ismi yoki familiyasini yozing">
+            </div>
+            <div class="col-lg-2 col-md-12">
+              <button class="btn btn-primary w-100"><i class="fa-solid fa-magnifying-glass me-2"></i>Qidirish</button>
+            </div>
+        </div>
+      </form>
+      {% if users_list %}
       <div class="table-responsive text-nowrap">
         <table class="table table-hover">
           <thead>
@@ -34,6 +46,9 @@
           </tbody>
         </table>
       </div>
+      {% else %}
+      <p class="text-center mb-5">Foydalanuvchilar topilmadi</p>
+      {% endif %}
     </div>  
 </div>
 {% endblock content %}

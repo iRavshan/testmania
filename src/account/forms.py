@@ -48,3 +48,6 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
+
+class UpdateProfile():
+    pass

@@ -6,5 +6,6 @@ urlpatterns = [
     path('register/', views.Register, name='register'),
     path('logout/', views.Logout, name='logout'),
     path('settings/', views.Settings, name='settings'),
-    path('<str:username>', views.Profile, name='profile')
+    path('<str:username>', views.Profile, name='profile'),
+    path('delete/<str:username>', views.Delete, name='delete')
 ]
