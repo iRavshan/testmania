@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
+{% block title %}{{post.title}}{% endblock title %}
 {% block content %}
-<!DOCTYPE html>
 {% load static %}
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row mb-5">
@@ -8,12 +8,19 @@
 	  <div class="col-lg-8">
 		<div class="card mb-4">
 			<img src="/uploads/{{post.thumbnail}}" alt="">
-			<h3 class="card-header pb-3">{{post.title}}</h3>
+			<h3 class="card-header pb-3" style="line-height: 1.5;">{{post.title}}</h3>
 			<small class="card-header py-0 pb-4"><i class="fa-solid fa-calendar-days me-2"></i>{{post.created_at}}</small>
 			<div class="card-body">
 			  <div class="row gy-3">
 				<div class="col-md">
 				  {{post.description|safe}}
+				{% if post.tags %}
+				<div class="demo-inline-spacing">
+					{% for tag in post.tags.all %}
+					<span class="badge bg-label-primary">{{tag.name}}</span>
+					{% endfor %}
+				</div>
+				{% endif %}
 				</div>
 			  </div>
 			</div>
