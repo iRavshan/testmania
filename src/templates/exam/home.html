@@ -16,7 +16,7 @@
           </div>
           <div class="offcanvas-body mx-0 flex-grow-0">
             <div class="col-lg-12">
-              <form action="" method="post">
+              <form action="{% url 'tests' %}" method="post" id="sort_tests">
                 <small class="text-light fw-semibold">Fanlar</small>
                 <div class="demo-inline-spacing mt-3 mb-3">
                   <div class="list-group">
@@ -28,9 +28,10 @@
                     </label>
                     {% endfor %}
                     {% endif %}
+                    <input type="text" hidden id="checked_subjects" name="checked_subjects">
                   </div>
                 </div>
-                <button type="button" class="btn btn-primary mb-2 d-grid w-100">Saralash</button>
+                <button type="button" class="btn btn-primary mb-2 d-grid w-100" onclick="SortTests()">Saralash</button>
                 <button type="button" class="btn btn-outline-secondary d-grid w-100" data-bs-dismiss="offcanvas">Bekor qilish</button>
               </form>
             </div>            
@@ -96,4 +97,19 @@
       </div>
     </div>
 </div>
+<script>
+  function SortTests(){
+    var input_subjects = document.getElementsByClassName('form-check-input');
+    var checked_subjects_txt = document.getElementById('checked_subjects');
+    checked_subjects_txt.value = '';
+    for(var i=0; i<=input_subjects.length; i++){
+      var subject = input_subjects[i].value
+      if(input_subjects[i].checked){
+        checked_subjects_txt.value = checked_subjects_txt.value + subject + " ";
+      }
+    }
+    document.getElementById('sort_tests').submit();
+  }
+
+</script>
 {% endblock content %}
