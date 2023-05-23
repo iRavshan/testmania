@@ -70,7 +70,9 @@
 			<div class="pb-2">
 				<small class="card-header py-0"><i class="fa-solid fa-calendar-days me-2"></i>{{post.created_at|date:'H:i / d.m.Y'}}</small>
 				<h6 class="card-header py-2" style="line-height: 1.5;"><a href="#" class="black-link">{{post.title}}</a></h6>
-				<hr>
+			</div>
+			<div class="top-rating-footer">
+				<a href="{% url 'rating' %}">Barchasini ko'rish <i class="fa-solid fa-angle-right"></i></a>
 			</div>
 		</div>
 	  </div>
