@@ -4,28 +4,24 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm, UpdateProfile
+from .forms import SignUpForm
 from .models import CustomUser
 
 def Register(request):
     context={}
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        if form.is_valid:
+        context['form'] = form
+        if form.is_valid():
             form.save()
-            firstname = form.cleaned_data['first_name']
-            lastname = form.cleaned_data['last_name']
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
-            checked_user = CustomUser.objects.filter(username=username).exists()
-            if(checked_user):
-                context['form'] = form
-                context['error'] = 'Ushbu foydalanuvchi nomi band'
             new_user = authenticate(request, username=username, password=password)
             if new_user is not None:
                 login(request, new_user)
                 return redirect('home')
-    form = SignUpForm()
+    else:
+        form = SignUpForm()
     context['form'] = form
     return render(request, 'account/register.html', context)
 
@@ -61,7 +57,6 @@ def Profile(request, username):
         'user': user
     }
     return render(request, 'account/profile.html', context)
-
 
 def Delete(request, username):
     if request.method == 'POST':

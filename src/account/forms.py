@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
+from django.core.exceptions import ValidationError
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(label="Ismingiz", 
@@ -41,13 +42,20 @@ class SignUpForm(UserCreationForm):
             'class': 'form-control',
             'placeholder': 'Parolni kiriting',
             'label': 'Parolni qayta kiriting',
-            'id': 'password1',
-            'name': 'password1',
+            'id': 'password2',
+            'name': 'password2',
             'required': ''
         })
+    
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
-
-class UpdateProfile():
-    pass
+        fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        pwd = cleaned_data.get('password1')
+        cof_pwd = cleaned_data.get('password2')
+        if pwd and cof_pwd:
+            if pwd != cof_pwd:
+                raise forms.ValidationError('Password is not match.')
+        return super().clean()

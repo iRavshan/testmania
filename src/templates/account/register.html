@@ -101,12 +101,12 @@
               <p class="mb-4">Bilimlaringizni biz bilan mustahkamlang</p>
 
               <form id="formAuthentication" class="mb-3" action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
                 {% if form.errors %}
                     {% for error in form.errors %}
-                    <p>{{error}}</p>
+                    <p>{{errors}}</p>
                     {% endfor %}
-                {% endif %}
-                {% csrf_token %}    
+                {% endif %}    
                 <div class="mb-3">
                     <label for="firstname" class="form-label">Ismingiz</label>
                     {{form.first_name}}
@@ -136,7 +136,7 @@
 
                 <div class="mb-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" onclick="TermsConditions()"/>
                     <label class="form-check-label" for="terms-conditions">
                       Barcha
                       <a href="javascript:void(0);">foydalanish shartlariga</a>
@@ -144,7 +144,7 @@
                     </label>
                   </div>
                 </div>
-                <button class="btn btn-primary d-grid w-100">Kirish</button>
+                <button class="btn btn-primary d-grid w-100" type="submit" disabled id="register-btn">Kirish</button>
               </form>
 
               <p class="text-center">
@@ -167,5 +167,15 @@
     <script src="{% static 'assets/vendor/js/menu.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+      function TermsConditions(){
+        if(document.getElementById('terms-conditions').checked){
+          document.getElementById("register-btn").removeAttribute("disabled");
+        }
+        else{
+          document.getElementById('register-btn').setAttribute('disabled', '');
+        }
+      }
+    </script>
 </body>
 </html>
