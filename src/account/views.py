@@ -6,20 +6,30 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 from .models import CustomUser
+from .validators import CheckConfirmationPassword, CleanUsername
 
 def Register(request):
     context={}
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         context['form'] = form
+        username = request.POST.get('username')
+        password = request.POST.get('password1')
+        confirm_password = request.POST.get('password2')
+
+        if(not CleanUsername(username)):
+            context['username_error'] = 'Ushbu foydalanuvchi nomi allaqachon band'
+            return render(request, 'account/register.html', context)
+        if(not CheckConfirmationPassword(password, confirm_password)):
+            context['confirm_password_error'] = 'Tasdiqlash paroli mos kelmadi'
+            return render(request, 'account/register.html', context)
+
         if form.is_valid():
             form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
             new_user = authenticate(request, username=username, password=password)
             if new_user is not None:
                 login(request, new_user)
-                return redirect('home')
+                return redirect('home')  
     else:
         form = SignUpForm()
     context['form'] = form

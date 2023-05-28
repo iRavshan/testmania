@@ -13,12 +13,12 @@
             <div class="card h-100">
               <!--<img class="card-img-top" src="{% static 'assets/img/backgrounds/test-bg.jpg' %}" alt="Card image cap" />-->
               <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'post' post.id %}">{{post.title}}</a></h5>
+                <h5 class="card-title"><a href="{% url 'post' post.title %}">{{post.title}}</a></h5>
                 <p class="card-text"> 
                   {{post.description|safe|truncatechars:200}}
                 </p>
                 <div class="flex">
-                  <a href="{% url 'post' post.id %}" class="btn btn-outline-primary">Batafsil <i class="fa-solid fa-arrow-up-right-from-square mx-1"></i></a>
+                  <a href="{% url 'post' post.title %}" class="btn btn-outline-primary">Batafsil <i class="fa-solid fa-arrow-up-right-from-square mx-1"></i></a>
                   <button class="btn float-end" style="border: none;"><i class="fa-regular fa-bookmark"></i></button>
                 </div>
               </div>

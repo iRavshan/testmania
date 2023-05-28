@@ -25,11 +25,10 @@ SECRET_KEY = 'django-insecure-mk9o(owy=#o=r&650x8essq653rkh9zk#^thc&m!r^rz00vce)
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-#ALLOWED_HOSTS = [
-#    'testmania.up.railway.app',
-#    'localhost'
-#]
+ALLOWED_HOSTS = [
+   'testmania.up.railway.app',
+   'localhost'
+]
 
 CSRF_TRUSTED_ORIGINS = ['https://testmania.up.railway.app']
 

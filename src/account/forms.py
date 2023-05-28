@@ -51,11 +51,8 @@ class SignUpForm(UserCreationForm):
         model = CustomUser
         fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
     
-    def clean(self):
-        cleaned_data = super().clean()
-        pwd = cleaned_data.get('password1')
-        cof_pwd = cleaned_data.get('password2')
-        if pwd and cof_pwd:
-            if pwd != cof_pwd:
-                raise forms.ValidationError('Password is not match.')
-        return super().clean()
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if CustomUser.objects.filter(username=username).exists():
+            raise forms.ValidationError(u'Username "%s" is already in use.' % username)
+        return username

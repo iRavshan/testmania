@@ -9,8 +9,8 @@ def Home(request):
     }
     return render(request, 'blog/blog.html', context)
 
-def SingleBlog(request, id):
-    post = get_object_or_404(Post, id=id)
+def SingleBlog(request, title):
+    post = get_object_or_404(Post, title=title)
     tags = post.tags.all()
     similar_posts = Post.objects.filter(tags__name__icontains=tags[0].name)[:3]
     last_news = Post.objects.all().order_by('-created_at').values()[:4]

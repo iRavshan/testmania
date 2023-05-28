@@ -179,3 +179,7 @@
 .top-rating-footer a i{
   margin-left: .25rem;
 }
+
+.validation-error{
+  color: red;
+}

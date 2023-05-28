@@ -101,12 +101,7 @@
               <p class="mb-4">Bilimlaringizni biz bilan mustahkamlang</p>
 
               <form id="formAuthentication" class="mb-3" action="{% url 'register' %}" method="POST">
-                {% csrf_token %}
-                {% if form.errors %}
-                    {% for error in form.errors %}
-                    <p>{{errors}}</p>
-                    {% endfor %}
-                {% endif %}    
+                {% csrf_token %}  
                 <div class="mb-3">
                     <label for="firstname" class="form-label">Ismingiz</label>
                     {{form.first_name}}
@@ -118,6 +113,9 @@
                 <div class="mb-3 mt-3">
                     <label for="username" class="form-label">Foydalanuvchi nomi</label>
                     {{form.username}}
+                    {% if username_error %}
+                    <small class="validation-error">{{username_error}}</small>
+                    {% endif %}  
                 </div>
                 <div class="mb-3 form-password-toggle">
                     <label for="password1" class="form-label">Parol yarating</label>
@@ -132,6 +130,9 @@
                         {{form.password2}}
                         <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>                    
                     </div>
+                    {% if confirm_password_error %}
+                    <small class="validation-error">{{confirm_password_error}}</small>
+                    {% endif %}
                 </div>
 
                 <div class="mb-3">
